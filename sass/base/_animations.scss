@@ -1,0 +1,51 @@
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(
+      -100px
+    ); /* -100 is reverse of x */ /* you can use -10rem */
+  }
+
+  /*This is only sample can add to animation
+  60% {
+    transform: rotate(180deg);
+  }*/
+
+  80% {
+    transform: translateX(10px); /**/
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+/* trick: cmd + D ( Can possible change the element in the same time ) */
+
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  80% {
+    transform: translateX(-10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+@keyframes moveInButtom {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
