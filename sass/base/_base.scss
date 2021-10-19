@@ -31,3 +31,8 @@ body {
     padding: 0;
   }
 }
+
+::selection { // this is for selection of the paragraph
+  background-color: $color-primary;
+  color: $color-white;
+}

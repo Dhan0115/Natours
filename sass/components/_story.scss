@@ -29,12 +29,18 @@
     height: 16rem;
     float: left;
     margin-top: -1.5rem;
-    -webkit-shape-outside: circle(50% at 50% 50%);
-    shape-outside: circle(50% at 50% 50%); // to define where the content floats around the element
-    -webkit-clip-path: circle(50% at 50% 50%);
-    clip-path: circle(50% at 50% 50%);
     transform: translateX(-4rem) skewX(11deg);
     position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+
+    // firefox web browser 
+    @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+      -webkit-clip-path: circle(50% at 50% 50%);
+      clip-path: circle(50% at 50% 50%);
+      -webkit-shape-outside: circle(50% at 50% 50%);
+      shape-outside: circle(50% at 50% 50%); // to define where the content floats around the element
+    }
 
     @include respond (phone){
       transform: translateX(-5rem) skewX(0);

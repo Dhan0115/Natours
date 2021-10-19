@@ -1,16 +1,39 @@
 .header {
-  height: 95vh;
+  height: 85vh;
   background-image: linear-gradient(
       to right bottom,
       rgba($color-primary-light, 0.8),
-      rgba($color-primary-dark, 0.8)
-    ),
-    url(../img/hero.jpg);
+      rgba($color-primary-dark, 0.8)),
+    url(../img/hero-small.jpg);
   background-size: cover;
   background-position: top;
   position: relative;
-  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
-  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); // prefix implemented by different browser.
+  
+
+  // This use to support firefox browser
+  @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); // prefix implemented by different browser.
+    height: 95vh;
+  }
+
+  @media (min-resolution: 192dpi) and (min-width: 600px),   //dpi- "dots per inch" 192dpi - thats the resolution of the apple retina screen
+         (-webkit-min-device-pixel-ratio: 2) and (min-width: 600px), // this is the ration of 2X for safari web browser
+         (min-width: 125em) {     
+      background-image: linear-gradient(
+      to right bottom,
+      rgba($color-secondary-light, 0.8),
+      rgba($color-secondary-dark, 0.8)),
+    url(../img/hero.jpg);
+  }
+
+  @media (min-width: 2000px) {     // When width becomes larger than 2000 pixels we wanna show the original hero image not the small one.
+    background-image: linear-gradient(
+      to right bottom,
+      rgba($color-secondary-light, 0.8),
+      rgba($color-secondary-dark, 0.8)),
+    url(../img/hero.jpg);
+  }
 
   @include respond(phone) {
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);

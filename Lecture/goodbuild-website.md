@@ -465,3 +465,72 @@ This Sample code of image. If the image use for a low resolution screen it will 
 
 This code can actually write a **media query** just like we do in CSS. And with this we force the browser to use image source set in case that **max width** is less than 600 pixels, and in case it's not, so if it's larger than 600 pixels then the browser is force to use this image source set.
  
+ ```
+ @media (min-resolution: 192dpi) and (min-width: 600px) { 
+    background-image: linear-gradient(
+      to right bottom,
+      rgba($color-secondary-light, 0.8),
+      rgba($color-secondary-dark, 0.8)),
+    url(../img/hero.jpg);
+  }
+```
+***192dpi*** - That's the resolution of the apple retina screen. **dpi** means *"dots per inch"*
+
+The large version of the hero image, is shown when the resolution is higher than 192, so when we have a two x screen, and at the same time, whenever the width is larger than 600 pixels. If below 600 pixels, is not display such a high resolution image.
+
+# WARNING !
+Many of the new CSS features showed are highly experimental and only work in top modern browser. Always Check **CANIUSE.COM** before using  a modern CSS Property in production.Use graceful degradation with @supports
+
+```
+@supports(-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px)) {
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  background-color: rgba($color-black, .3);
+```
+
+# Terminal 
+In the package.json file 
+
+```
+[diane@Dianes-MacBook-Air starter % npm run concat:css --save-dev
+```
+> "compile:sass": "node-sass sass/main.scss css/style.comp.css",
+
+> "concat:css": "concat -o css/style.concat.css css/icon-font.css css/style.comp.css"
+```
+[diane@Dianes-MacBook-Air starter % npm run concat:css
+```
+
+So we have now all the CSS code in one single file. Which is a lot better, because like this, we only need one HTTP request instead of two, when we have two files.
+
+```
+[diane@Dianes-MacBook-Air starter % npm install autoprefixer --save-dev
+```
+```
+[diane@Dianes-MacBook-Air starter % npm install postcss-cli --save-dev
+```
+To update the PostCSS 8 or above
+```
+[diane@Dianes-MacBook-Air starter % npm i -D postcss@latest
+```
+> "prefix:css": "postcss --use autoprefixer -b 'last 10 versions' css/style.concat.css -o css/style.prefix.css",
+```
+[diane@Dianes-MacBook-Air starter % npm run prefix:css
+```
+to compress file :
+> "compress:css": "node-sass css/style.prefix.css css/style.css --output-style compressed",
+```
+[diane@Dianes-MacBook-Air starter % npm run compress:css
+```
+to save all file :
+> "build:css": "npm-run-all compile:sass concat:css prefix:css compress:css"
+```
+[diane@Dianes-MacBook-Air starter % npm run build:css
+```
+to run live server and watch at the same time :
+> "devserver": "live-server",
+
+> "start": "npm-run-all --parallel devserver watch:sass",
+```
+[diane@Dianes-MacBook-Air starter % npm run start
+```
